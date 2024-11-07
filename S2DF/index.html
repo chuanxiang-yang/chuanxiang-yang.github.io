@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Monge-Ampere Regularization for Learning Arbitrary Shapes from Point Clouds</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+
+<body>
+
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div class="navbar-menu">
+      <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+        <a class="navbar-item">
+          <span class="icon">
+            <i class="fas fa-home"></i>
+          </span>
+        </a>
+
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            More Research
+          </a>
+          <div class="navbar-dropdown">
+            <!-- <a class="navbar-item" href="https://hypernerf.github.io">
+            HyperNeRF
+          </a> -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </nav>
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container ">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">Monge-Ampere Regularization for Learning Arbitrary Shapes from
+              Point Clouds</h1>
+            <div class="is-size-4 publication-authors">
+              <span class="author-block">
+                <a onclick="return false;">Chuanxiang Yang</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a>Yuanfeng Zhou</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a>Guangshun Wei</a><sup>1</sup>,
+              </span>
+              <span class="author-block">
+                <a>Long Ma</a><sup>1</sup>,
+              </span>
+              <span class="author-block">
+                <a>Junhui Hou</a><sup>2</sup>,
+              </span>
+              <span class="author-block">
+                <a>Yuan Liu</a><sup>3</sup>,
+              </span>
+              <span class="author-block">
+                <a>Wenping Wang</a><sup>4</sup>
+              </span>
+            </div>
+
+
+            <div class="is-size-4 publication-authors">
+              <span class="author-block"><sup>1</sup>Shandong University,</span>
+              <span class="author-block"><sup>2</sup>City University of Hong Kong,</span>
+              <span class="author-block"><sup>3</sup>Nanyang Technological University,</span>
+              <span class="author-block"><sup>4</sup>Texas A&M University</span>
+            </div>
+            <img src="./static/images/teaser.png" class="interpolation-image" />
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- PDF Link. -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/pdf/2410.18477" class="external-link button is-medium is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2410.18477" class="external-link button is-medium is-rounded is-dark">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+                <!-- Code Link. -->
+                <span class="link-block">
+                  <a href="https://github.com/chuanxiang-yang/S2DF"
+                    class="external-link button is-medium is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+
+
+  <section class="section">
+    <div class="container">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-2">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              As commonly used implicit geometry representations, the signed distance function (SDF) is limited to
+              modeling watertight shapes, while the unsigned distance function (UDF) is capable of representing various
+              surfaces. However, its inherent theoretical shortcoming, i.e., the non-differentiability at the zero level
+              set, would result in sub-optimal reconstruction quality.
+            </p>
+            <p>
+              In this paper, we propose the scaled-squared distance function (S<sup>2</sup>DF), a novel implicit surface
+              representation for modeling <i style="font-weight: 700;">arbitrary</i> surface types. S<sup>2</sup>DF does
+              not distinguish between inside and outside regions while effectively addressing the non-differentiability
+              issue of UDF at the zero level set. We demonstrate that S<sup>2</sup>DF satisfies a second-order partial
+              differential equation of Monge-Ampere-type, allowing us to develop a learning pipeline that leverages a
+              novel Monge-Ampere regularization to directly learn S<sup>2</sup>DF from raw unoriented point clouds <i
+                style="font-weight: 700;">without</i> supervision from ground-truth S<sup>2</sup>DF values. Extensive
+              experiments across multiple datasets show that our method significantly outperforms state-of-the-art
+              supervised approaches that require ground-truth surface information as supervision for training.
+            </p>
+          </div>
+        </div>
+      </div>
+  </section>
+
+
+
+  <section class="section hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <h2 class="title is-2">Method</h2>
+
+      </div>
+
+      <!-- S2DF. -->
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">S2DF</h2>
+          <div class="content has-text-justified">
+            <p>
+              We introduce scaled-squared distance function (S<sup>2</sup>DF), a novel implicit surface representation
+              capable of representing shapes of arbitrary types while remaining differentiable at the zero level set.
+            </p>
+            <div style="text-align: center;">
+              <img src="./static/images/3D.jpg" width="70%" style="margin: 0 auto;" />
+            </div>
+          </div>
+          <br />
+
+          <!-- Monge-Ampere Regularization. -->
+          <h3 class="title is-3">Monge-Ampere Regularization</h3>
+          <div class="content has-text-justified">
+            <p>
+              We analyze the theoretical properties of S2DF, demonstrating that it satisfies a Monge-Ampere equation. Based on this, we propose Monge-Ampere regularization to directly learn S<sup>2</sup>DF from raw unoriented point clouds without supervision from ground-truth S<sup>2</sup>DF values.
+            </p>
+            <div style="text-align: center;">
+              <img src="./static/images/properties.jpg" width="90%" style="margin: 0 auto;" />
+            </div>
+            <div style="text-align: center;">
+              <img src="./static/images/method.jpg" width="90%" style="margin: 0 auto;" />
+            </div>
+          </div>
+        </div>
+      </div>
+  </section>
+
+  <section class="section hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <h2 class="title is-2">Comparison Results</h2>
+      </div>
+
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Shapenet</h2>
+          <div class="content has-text-justified">
+            <div style="text-align: center;">
+              <img src="./static/images/shapenet-page.jpg" width="100%" style="margin: 0 auto;" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Stanford 3D Scanning Repository</h2>
+          <div class="columns is-centered">
+            <div class="column" style="height: 100%;">
+              <div class="img-slider">
+                <div id="dragon_vrip"></div>
+                <span class="handler" id="handler"></span>
+                <input type="range" min="0" max="100" value="50"  class="Myslider" id="slider" />
+                <img src="./static/images/Ours_dragon_vrip.jpg"/>
+              </div>
+              <p style="display: inline-block; position: relative; left: 10%;">
+                <b>LevelSetUDF</b>
+              </p>
+              <p style="display: inline-block; position: relative; left: 40%;">
+                <b>Ours</b>    
+              </p>
+            </div>
+            <div class="column" style="height: 100%;">
+              <div class="img-slider">
+                <div id="xyzrgb_dragon"></div>
+                <span class="handler" id="handler2"></span>
+                <input type="range" min="0" max="100" value="50"  class="Myslider" id="slider2" />
+                <img src="./static/images/Ours_xyz_dragon.jpg" />
+              </div>
+              <p style="display: inline-block; position: relative; left: 10%;">
+                <b>LevelSetUDF</b>
+              </p>
+              <p style="display: inline-block; position: relative; left: 40%;">
+                <b>Ours</b>    
+              </p>
+            </div>
+           
+          </div>
+
+        </div>
+      </div>
+
+
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Waymo</h2>
+          <div class="content has-text-justified">
+            <div style="text-align: center;">
+              <img src="./static/images/Waymo-page.jpg" width="100%" style="margin: 0 auto;" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">More Results</h2>
+          <div class="content has-text-justified">
+            <div id="results-carousel" class="carousel results-carousel">
+              <div class="item" style="text-align:center;">
+                <p class="title is-2" style="margin-top: 20px;">
+                  Non-watertight Shapes
+                </p>
+                <video autoplay controls muted loop playsinline>
+                  <source src="./static/videos/non-water.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="item" style="text-align:center">
+                <p class="title is-2" style="margin-top: 20px;">
+                  Watertight Shapes
+                </p>
+                <video autoplay controls muted loop playsinline>
+                  <source src="./static/videos/water.mp4" type="video/mp4">
+                </video>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <section class="section" id="BibTeX">
+    <div class="container content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code style="line-height: 1.5;">@article{yang2024monge,
+  author = {Yang, Chuanxiang and Zhou, Yuanfeng and Wei, Guangshun and Ma, Long and Hou, Junhui and Liu, Yuan and Wang, Wenping},
+  title = {Monge-Ampere Regularization for Learning Arbitrary Shapes from Point Clouds},
+  journal = {arXiv preprint arXiv:2410.18477},
+  year = {2024},
+}</code></pre>
+    </div>
+  </section>
+
+
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p>
+              This webpage template is borrowed from <a rel="license"
+                href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>
+<script>
+  const handler = document.getElementById('handler')
+  const slider = document.getElementById("slider");
+  const handler2 = document.getElementById('handler2')
+  const slider2 = document.getElementById("slider2");
+  slider.addEventListener("input", function (e) {
+    tem = e.target.value
+    if (tem < 10)
+      tem = 10
+    else if (tem > 90)
+      tem = 90
+    document.querySelector("#dragon_vrip").style.width =
+      tem + "%";
+    handler.style.left = tem + "%";
+  });
+
+  slider2.addEventListener("input", function (e) {
+    tem = e.target.value
+    if (tem < 9)
+      tem = 9
+    else if (tem > 88)
+      tem = 88
+    document.querySelector("#xyzrgb_dragon").style.width =
+      tem + "%";
+    handler2.style.left = tem + "%";
+
+  });
+</script>
