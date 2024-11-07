@@ -359,10 +359,10 @@
   const slider2 = document.getElementById("slider2");
   slider.addEventListener("input", function (e) {
     tem = e.target.value
-    if (tem < 10)
-      tem = 10
-    else if (tem > 90)
-      tem = 90
+    if (tem < 12)
+      tem = 12
+    else if (tem >80)
+      tem = 80
     document.querySelector("#dragon_vrip").style.width =
       tem + "%";
     handler.style.left = tem + "%";
