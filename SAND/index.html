@@ -2,122 +2,357 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SAND: Spatially Adaptive Network Depth for Fast Sampling of Neural Implicit Surfaces</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>SAND: Spatially Adaptive Network Depth for Fast Sampling of Neural Implicit Surfaces</title>
 
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
 
-    function gtag() {
-      dataLayer.push(arguments);
-    }
+        function gtag() {
+            dataLayer.push(arguments);
+        }
 
-    gtag('js', new Date());
+        gtag('js', new Date());
 
-    gtag('config', 'G-PYVRSFMDRL');
-  </script>
+        gtag('config', 'G-PYVRSFMDRL');
+    </script>
 
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
-  <link rel="stylesheet" href="./static/css/style.css">
-  <link rel="stylesheet" href="./static/css/bulma.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
-  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css">
-   <link rel="icon" href="./favicon.ico">
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+    <link href="./static/css/style.css" rel="stylesheet">
+    <link href="./static/css/bulma.min.css" rel="stylesheet">
+    <link href="./static/css/bulma-carousel.min.css" rel="stylesheet">
+    <link href="./static/css/bulma-slider.min.css" rel="stylesheet">
+    <link href="./static/css/fontawesome.all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" rel="stylesheet">
+    <link href="./static/css/index.css" rel="stylesheet">
+    <link href="./favicon.ico" rel="icon">
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script defer src="./static/js/fontawesome.all.min.js"></script>
-  <script src="./static/js/bulma-carousel.min.js"></script>
-  <script src="./static/js/bulma-slider.min.js"></script>
-  <script src="./static/js/index.js"></script>
-  <script type="module" src="./static/js/model-viewer.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="./static/js/fontawesome.all.min.js"></script>
+    <script src="./static/js/bulma-carousel.min.js"></script>
+    <script src="./static/js/bulma-slider.min.js"></script>
+    <script src="./static/js/index.js"></script>
+    <script src="./static/js/model-viewer.min.js" type="module"></script>
 
 </head>
 
 <body>
 
-  <nav class="navbar" role="navigation" aria-label="main navigation">
+<nav aria-label="main navigation" class="navbar" role="navigation">
     <div class="navbar-brand">
-      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </a>
+        <a aria-expanded="false" aria-label="menu" class="navbar-burger" role="button">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
     </div>
     <div class="navbar-menu">
-      <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
-        <a class="navbar-item">
+        <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+            <a class="navbar-item">
           <span class="icon">
             <i class="fas fa-home"></i>
           </span>
-        </a>
+            </a>
 
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link">
-            More Research
-          </a>
-          <div class="navbar-dropdown">
-            <!-- <a class="navbar-item" href="https://hypernerf.github.io">
-            HyperNeRF
-          </a> -->
-          </div>
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link">
+                    More Research
+                </a>
+                <div class="navbar-dropdown">
+                    <a class="navbar-item" href="../S2DF/index.html">
+                    S2DF
+                    </a>
+                </div>
+            </div>
         </div>
-      </div>
 
     </div>
-  </nav>
+</nav>
 
 
-  <section class="hero">
+<section class="hero">
     <div class="hero-body">
-      <div class="container ">
-        <div class="columns is-centered">
-          <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title">SAND: Spatially Adaptive Network Depth for Fast Sampling of Neural Implicit Surfaces</h1>
+        <div class="container">
+            <div class="columns is-centered">
+                <div class="column has-text-centered">
+                    <h1 class="title is-1 publication-title">SAND: Spatially Adaptive Network Depth for Fast Sampling of
+                        Neural Implicit Surfaces
+                    </h1>
+                    <h2 class="title is-2 publication-title" style="color: #c0392b;">
+                        ACM TOG
+                    </h2>
 
+                    <div class="is-size-4 publication-authors">
+                        <span class="author-block">
+                        <a onclick="return false;">Chuanxiang Yang</a><sup>1</sup>,
+                        </span>
+
+                        <span class="author-block">
+                        <a>Junhui Hou</a><sup>2</sup>,
+                        </span>
+
+                        <span class="author-block">
+                        <a>Yuan Liu</a><sup>3</sup>,
+                        </span>
+
+                        <span class="author-block">
+                        <a>Siyu Ren</a><sup>2</sup>,
+                        </span>
+
+                        <span class="author-block">
+                        <a>Guangshun Wei</a><sup>1</sup>,
+                        </span>
+
+
+                        <span class="author-block">
+                        <a>Taku Komura,</a><sup>4</sup>
+                        </span>
+
+                        <span class="author-block">
+                        <a>Yuanfeng Zhou*,</a><sup>1</sup>
+                        </span>
+
+                        <span class="author-block">
+                        <a>Wenping Wang*</a><sup>5</sup>
+                        </span>
+                    </div>
+
+
+                    <div class="is-size-4 publication-authors">
+                        <span class="author-block"><sup>1</sup>Shandong University,</span>
+                        <span class="author-block"><sup>2</sup>City University of Hong Kong,</span>
+                        <span class="author-block"><sup>4</sup>Hong Kong University of Science and Technology,</span>
+                        <span class="author-block"><sup>5</sup>The University of Hong Kong,</span>
+                        <span class="author-block"><sup>6</sup>Texas A&M University</span>
+                    </div>
+                    <img class="interpolation-image" src="./static/images/teaser.jpg"/>
+                    <div class="column has-text-centered">
+                        <div class="publication-links">
+                            <!-- PDF Link. -->
+                            <span class="link-block">
+                                <a class="external-link button is-medium is-rounded is-dark"
+                                   href="https://arxiv.org/pdf/2604.25936">
+                                    <span class="icon">
+                                      <i class="fas fa-file-pdf"></i>
+                                    </span>
+                                    <span>Paper</span>
+                                </a>
+                            </span>
+
+                            <span class="link-block">
+                                <a class="external-link button is-medium is-rounded is-dark"
+                                   href="https://arxiv.org/abs/2604.25936">
+                                    <span class="icon">
+                                      <i class="ai ai-arxiv"></i>
+                                    </span>
+                                    <span>arXiv</span>
+                                </a>
+                            </span>
+                            <!-- Video Link. -->
+                            <span class="link-block">
+                                <a class="external-link button is-medium is-rounded is-dark" href="">
+                                    <span class="icon">
+                                      <i class="fas fa-video"></i>
+                                    </span>
+                                    <span>Video</span>
+                                </a>
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
             </div>
-
-
-
-
-
-            </div>
-          </div>
         </div>
-      </div>
     </div>
-  </section>
+</section>
 
 
-
-
-
-
-
-
-
-
-
-
-  <footer class="footer">
+<section class="section">
     <div class="container">
-      <div class="columns is-centered">
-        <div class="column is-8">
-          <div class="content has-text-centered">
-            <p>
-              This webpage template is borrowed from <a rel="license"
-                href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>.
-            </p>
-          </div>
+        <!-- Abstract. -->
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+                <h2 class="title is-2">Abstract</h2>
+                <div class="content has-text-justified">
+                    <p>
+                        Implicit neural representations are powerful for geometric modeling, but their practical use is
+                        often limited by the high computational cost of network evaluations. We observe that implicit
+                        representations require progressively lower accuracy as query points move farther from the
+                        target
+                        surface, and that even within the same iso-surface, representation difficulty varies spatially
+                        with
+                        local geometric complexity. However, conventional neural implicit models evaluate all query
+                        points
+                        with the same network depth and computational cost, ignoring this spatial variation and thereby
+                        incurring substantial computational waste.
+                    </p>
+                    <p>
+                        Motivated by this observation, we propose an efficient
+                        neural implicit geometry representation framework with spatially adaptive network depth (SAND).
+                        SAND
+                        leverages a volumetric network-depth map together with a tailed multi-layer perceptron (T-MLP)
+                        to
+                        model implicit representation. The volumetric depth map records, for each spatial region, the
+                        network depth required to achieve sufficient accuracy, while the T-MLP is a modified MLP
+                        designed to
+                        learn implicit functions such as signed distance functions, where an output branch, referred to
+                        as a
+                        tail, is attached to each hidden layer. This design allows network evaluation to terminate
+                        adaptively without traversing the full network and directs computational resources to
+                        geometrically
+                        important and complex regions, improving efficiency while preserving high-fidelity
+                        representations.
+                        Extensive experimental results demonstrate that our approach can significantly improve the
+                        inference-time query speed of implicit neural representations.
+                    </p>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </footer>
+</section>
+
+
+<section class="section hero-body">
+    <div class="container">
+        <div class="columns is-centered">
+            <h2 class="title is-2">Method</h2>
+
+        </div>
+
+        <!-- S2DF. -->
+        <div class="columns is-centered">
+            <div class="column is-four-fifths">
+                <h2 class="title is-3">Overview</h2>
+                <div style="text-align: center;">
+                    <img src="./static/images/SAND.jpg" style="margin: 0 auto;" width="100%"/>
+
+                </div>
+                <div class="content has-text-justified">
+                    <p>
+                        SAND consists of two main components: a volumetric network-depth map and a tailed multi-layer
+                        perceptron (T-MLP). The volumetric depth map records the network depth required for each spatial
+                        region to achieve sufficient accuracy when evaluating the implicit function. The T-MLP is a
+                        modified MLP with intermediate output branches, or tails, enabling valid predictions at any
+                        depth.
+                    </p>
+                    <p>
+                        During training, we first train the T-MLP to learn the implicit function. Once the T-MLP
+                        is trained, we compute the required network depth for each point according to the outputs of
+                        T-MLP. These depth values are then stored in the volumetric network-depth map for subsequent
+                        inference.
+                    </p>
+                    <p>
+                        During inference, each query point first retrieves its target evaluation depth from the
+                        volumetric map, and the T-MLP is then executed only up to the corresponding depth to output
+                        implicit function values
+                    </p>
+                </div>
+                <h2 class="title is-3">Tailed Multi-Layer Perceptron</h2>
+                <div class="content has-text-justified">
+                    <p>
+                        To enable early termination at any network depth, we propose the tailed multi-layer perceptron
+                        (T-MLP). Built on a standard MLP, the T-MLP attaches an output branch, also called a
+                        <em>tail</em>, after each hidden layer. The first tail produces a coarse approximation of the
+                        target function. The second tail learns the residual between the target and the first tail’s
+                        output. The third tail captures the residual between the target and the cumulative output of the
+                        first two tails. In general, the <i>k</i>-th tail models the residual between the target
+                        function and the sum of the outputs from the first <i>k−1</i> tails.
+                    </p>
+                    <div style="text-align: center;">
+                        <img src="./static/images/T-MLP.jpg" style="margin: 0 auto;" width="90%"/>
+                    </div>
+                </div>
+                <br/>
+
+                <!-- Monge-Ampere Regularization. -->
+                <h3 class="title is-3">Volumetric Network-Depth Map</h3>
+                <div class="content has-text-justified">
+                    <p>
+                        To allocate computation according to local geometric complexity, we introduce the volumetric
+                        network-depth map, which assigns an appropriate network depth to each spatial region.
+                        Regions with simple geometry can be represented using shallow network evaluations, while
+                        regions containing fine geometric details are assigned deeper evaluations for higher
+                        representational capacity. During inference, query points are first associated with their
+                        corresponding depth values through the volumetric map, which then determines the adaptive
+                        termination depth of the T-MLP.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section hero-body">
+    <div class="container">
+        <div class="columns is-centered">
+            <h2 class="title is-2">Experiments</h2>
+        </div>
+
+        <div class="columns is-centered">
+            <div class="column is-four-fifths">
+                <h2 class="title is-3" style="margin-top: 20px;">Efficient 3D Shape Representation</h2>
+                <div class="content has-text-justified">
+                    <div style="text-align: center;">
+                        <img src="./static/images/efficient_3D_shape_representation.jpg" style="margin: 0 auto;" width="100%"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="columns is-centered">
+            <div class="column is-four-fifths">
+                <h2 class="title is-3">Neural Levels of Detail</h2>
+                <div class="content has-text-justified">
+                    <div style="text-align: center;">
+                        <img src="./static/images/LOD.jpg" style="margin: 0 auto;" width="100%"/>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+    </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+    <div class="container">
+        <div class="columns is-centered">
+            <div class="column is-four-fifths">
+                <h2 class="title">BibTeX</h2>
+                <pre><code style="line-height: 1.5;">@article{yang2026sand,
+  title={SAND: Spatially Adaptive Network Depth for Fast Sampling of Neural Implicit Surfaces},
+  author={Yang, Chuanxiang and Hou, Junhui and Liu, Yuan and Ren, Siyu and Wei, Guangshun and Komura, Taku and Zhou, Yuanfeng and Wang, Wenping},
+  journal={arXiv preprint arXiv:2604.25936},
+  year={2026}
+}
+          </code></pre>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<footer class="footer">
+    <div class="container">
+        <div class="columns is-centered">
+            <div class="column is-8">
+                <div class="content has-text-centered">
+                    <p>
+                        This webpage template is borrowed from <a href="https://github.com/nerfies/nerfies.github.io"
+                                                                  rel="license">Nerfies</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
 
 </body>
 
@@ -125,31 +360,31 @@
 
 
 <script>
-  const handler = document.getElementById('handler')
-  const slider = document.getElementById("slider");
-  const handler2 = document.getElementById('handler2')
-  const slider2 = document.getElementById("slider2");
+    const handler = document.getElementById('handler')
+    const slider = document.getElementById("slider");
+    const handler2 = document.getElementById('handler2')
+    const slider2 = document.getElementById("slider2");
 
-  slider.addEventListener("input", function (e) {
-    tem = e.target.value
-    if (tem < 12)
-      tem = 12
-    else if (tem > 80)
-      tem = 80
-    document.querySelector("#dragon_vrip").style.width =
-      tem + "%";
-    handler.style.left = tem + "%";
-  });
+    slider.addEventListener("input", function (e) {
+        tem = e.target.value
+        if (tem < 12)
+            tem = 12
+        else if (tem > 80)
+            tem = 80
+        document.querySelector("#dragon_vrip").style.width =
+            tem + "%";
+        handler.style.left = tem + "%";
+    });
 
-  slider2.addEventListener("input", function (e) {
-    tem = e.target.value
-    if (tem < 9)
-      tem = 9
-    else if (tem > 88)
-      tem = 88
-    document.querySelector("#xyzrgb_dragon").style.width =
-      tem + "%";
-    handler2.style.left = tem + "%";
+    slider2.addEventListener("input", function (e) {
+        tem = e.target.value
+        if (tem < 9)
+            tem = 9
+        else if (tem > 88)
+            tem = 88
+        document.querySelector("#xyzrgb_dragon").style.width =
+            tem + "%";
+        handler2.style.left = tem + "%";
 
-  });
+    });
 </script>
